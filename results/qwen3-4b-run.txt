@@ -1,0 +1,18 @@
+How results/qwen3-4b-raw.jsonl was collected
+
+date: 2026-11-09, between about 09:22 and 10:04 UTC (last reply written 10:04:10 UTC)
+command: python -m evidence_cite.llm --raw results/qwen3-4b-raw.jsonl --out results/qwen3-4b.md
+model: qwen3:4b-instruct-2507-q4_K_M, served by Ollama on localhost, digest 0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0
+settings: temperature 0, num_ctx 4096, format json (the defaults of the command)
+machine: a laptop with an RTX 4050 GPU, 6 GB
+samples: seeds 1 to 3, 20 purchases per seed, each shown clean and with 5% noise (120 replies, 480 findings)
+pages-sha256: 287e90e8eecae98c8e484f3c3533b5c122812e8633e869c3e61bbccf587b2e7f
+
+The replies written by that run do not carry the model name or temperature (the fields were added
+afterwards), which is why this note holds them. The pages-sha256 line is the sha256 over the prompt
+built for every reply, in file order (evidence_cite.llm.pages_digest); a test fails if the prompts the
+code generates stop matching it, and replay can check it with --expect-digest.
+
+Before this run the prompt was changed once. In a one-sample trial the model wrote "S0001/po page 1"
+as the document id, so every claim of that sample was rejected; the document headers and the doc_id
+instruction were reworded. That trial's reply was not kept.
